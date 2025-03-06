@@ -1,0 +1,78 @@
+version: "3.8"
+name: atlas-cmms
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: atlas_db
+    restart: always
+    environment:
+      POSTGRES_DB: atlas
+      POSTGRES_USER: rootUser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  api:
+    build: api
+    container_name: atlas_api
+    depends_on:
+      - postgres
+      - minio
+    environment:
+      DB_URL: postgres/atlas
+      DB_USER: rootUser
+      DB_PWD: mypassword
+      PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:8080}
+      FASTSPRING_PWD: ${FASTSPRING_PWD}
+      FASTSPRING_USER: ${FASTSPRING_USER}
+      PUBLIC_FRONT_URL: ${PUBLIC_FRONT_URL}
+      GCP_BUCKET_NAME: ${GCP_BUCKET_NAME}
+      GCP_JSON: ${GCP_JSON}
+      GCP_PROJECT_ID: ${GCP_PROJECT_ID}
+      MAIL_RECIPIENTS: ${MAIL_RECIPIENTS}
+      SMTP_PWD: ${SMTP_PWD}
+      SMTP_USER: ${SMTP_USER}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_BUCKET: atlas-bucket
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+      STORAGE_TYPE: ${STORAGE_TYPE:-minio} #gpc|minio
+      PUBLIC_MINIO_ENDPOINT: ${PUBLIC_MINIO_ENDPOINT:-http://localhost:9000}
+    ports:
+      - "8080:8080"
+  frontend:
+    build:
+      context: frontend
+      args:
+        REACT_APP_API_URL: ${PUBLIC_API_URL}
+        REACT_APP_JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+        REACT_APP_GOOGLE_KEY: ${REACT_APP_GOOGLE_KEY}
+        REACT_APP_GOOGLE_TRACKING_ID: ${REACT_APP_GOOGLE_TRACKING_ID}
+        REACT_APP_MUI_X_LICENSE: ${REACT_APP_MUI_X_LICENSE}
+    container_name: atlas_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+  minio:
+    image: minio/minio
+    container_name: atlas_minio
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+      MINIO_SERVER_URL: "https://minio.emcampo.stapplay.com.br"
+      MINIO_BROWSER_REDIRECT_URL: "https://minio.emcampo.stapplay.com.br/minio/ui"
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server --address ":9000" --console-address ":9001" /data
+    restart: always
+
+volumes:
+  postgres_data:
+  minio_data:
