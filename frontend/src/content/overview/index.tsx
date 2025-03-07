@@ -51,10 +51,10 @@ function Overview() {
                 style={{ cursor: 'pointer' }}
                 fontSize={13}
                 onClick={() => {
-                  window.open('https://www.intel-loop.com/', '_blank');
+                  window.open('https://gluoon.com.br/', '_blank');
                 }}
               >
-                Powered by Intelloop
+                Powered ❤️ Gluoon
               </Typography>
             </Box>
             <Stack

@@ -28,8 +28,8 @@ i18n
   .init({
     resources,
     keySeparator: false,
-    lng: 'en',
-    fallbackLng: 'en',
+    lng: 'pt_br',
+    fallbackLng: 'pt_br',
     react: {
       useSuspense: true
     },

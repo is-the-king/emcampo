@@ -63,7 +63,7 @@ function Sidebar() {
             >
               <Box>
                 <Logo white />
-                <Typography style={{cursor: 'pointer', color: 'white'}} fontSize={13} onClick={()=>{ window.open("https://www.intel-loop.com/",'_blank')}}>Powered by Intelloop</Typography>
+                <Typography style={{cursor: 'pointer', color: 'white'}} fontSize={13} onClick={()=>{ window.open("https://gluoon.com.br/",'_blank')}}>Powered ❤️ Gluoon</Typography>
               </Box>
             </Box>
           </Box>
@@ -112,7 +112,7 @@ function Sidebar() {
               >
                 <Box>
                   <Logo white />
-                  <Typography style={{cursor: 'pointer', color: 'white'}} fontSize={13} onClick={()=>{ window.open("https://www.intel-loop.com/",'_blank')}}>Powered by Intelloop</Typography>
+                  <Typography style={{cursor: 'pointer', color: 'white'}} fontSize={13} onClick={()=>{ window.open("https://gluoon.com.br/",'_blank')}}>Powered ❤️ Gluoon</Typography>
                 </Box>
               </Box>
             </Box>

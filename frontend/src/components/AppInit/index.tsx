@@ -20,7 +20,7 @@ function AppInit() {
     >
       <Box>
         <Logo />
-        <Typography style={{cursor: 'pointer'}} fontSize={13} onClick={()=>{ window.open("https://www.intel-loop.com/",'_blank')}}>Powered by Intelloop</Typography>
+        <Typography style={{cursor: 'pointer'}} fontSize={13} onClick={()=>{ window.open("https://gluoon.com.br/",'_blank')}}>Powered ❤️ Gluoon</Typography>
       </Box>
     </Box>
   );
