@@ -1,71 +1,163 @@
-# Em Campo
+<p align="center"><img src="frontend/public/static/images/logo/logo.png" width="80"></p>
+<h1 align="center">Atlas CMMS</h1>
 
-Sistema integrado para gestão de ordens de serviço em campo.
+[Atlas CMMS](https://github.com/grashjs/cmms) is a powerful, self-hosted maintenance management system designed for both
+web and mobile platforms using Docker. It simplifies and automates the management of maintenance activities, making it
+ideal for IT managers or developers looking to implement solutions that keep their organization's assets running smoothly.
+Think of it like **Jira for technicians**.
 
-## 📋 Sobre o Projeto
+**Example industries**
 
-O Em Campo é uma plataforma completa desenvolvida para otimizar a gestão de ordens de serviço em campo. O sistema oferece uma solução abrangente que conecta gestores, técnicos e clientes, permitindo o acompanhamento em tempo real dos serviços prestados, desde a abertura do chamado até sua conclusão.
+- Facilities Managers (buildings, property, real estate)
+- Manufacturing/Production Teams (machinery and equipment)
+- Healthcare Facilities (medical equipment maintenance)
+- Hospitality Managers (hotels and resorts)
+- Public Sector (infrastructure and public buildings)
+- Educational Institutions (campus maintenance)
+- Utility Companies (power, water, and energy systems)
 
-## 🏗️ Arquitetura do Projeto
+**Screenshots**:
+<div align="center">
 
-O projeto está estruturado em três componentes principais:
+![work_orders_screenshot.png](images/work_orders_screenshot.png)
 
-- [`/frontend`](./frontend) - Interface web responsiva para gestão e administração
-- [`/mobile`](./mobile) - Aplicativo móvel para técnicos em campo
-- [`/api`](./api) - Backend e API REST
+![](https://i.ibb.co/7tGYCtv/Screenshot-502.png)
 
-## 🚀 Começando
+<img src="https://i.ibb.co/B39dVjC/Screenshot-20230320-110652.jpg" width="300"/>
+</div>
 
-### Pré-requisitos
+## ⚡ **Features**
 
-- Node.js (versão 16 ou superior)
-- npm ou yarn
-- Docker e Docker Compose (opcional)
+### Work Orders & Maintenance
 
-### Instalação
+- 📝 Create, assign, and track work orders.
+- ⏱️ Log time, set priorities, and track history.
+- 🤖 Automate work orders with triggers.
+- 📊 Export reports and view analytics.
 
-1. Clone o repositório:
-```bash
-git clone https://github.com/seu-usuario/emcampo.git
-cd emcampo
+### Analytics & Reporting
+
+- 💼 Work order compliance and cost analysis.
+- 🛠️ Equipment downtime and reliability insights.
+- 💵 Cost trends and labor tracking.
+
+### Equipment & Inventory
+
+- ⚙️ Track equipment, downtime, and maintenance costs.
+- 📦 Manage inventory with stock alerts.
+- 🛒 Automate purchase orders and approvals.
+
+### User & Workflow Management
+
+- 👥 Assign tasks to teams or service providers.
+- 🧑‍💼 Customizable user roles and permissions.
+- 🔄 Define workflows with automation logic.
+
+### Locations & Requests
+
+- 📍 Manage locations with Google Maps integration.
+- 📑 Create and track service requests.
+
+You can check out the [complete list of features](api/Current%20features.pdf).
+
+We'd love to have **new contributors**, so feel free to join us!  
+⭐ **Star this repo to support us!**
+
+## Self Host / Run locally
+
+#### Clone the Repository
+
+```sh
+git clone https://github.com/grashjs/cmms.git
+cd cmms
 ```
 
-2. Consulte os READMEs específicos em cada diretório para instruções detalhadas de instalação e configuração:
-- [Frontend](./frontend/README.md)
-- [Mobile](./mobile/README.md)
-- [API](./api/README.md)
+### Set environment variables
 
-## 🛠️ Tecnologias Utilizadas
+Configure the environment variables in this file [.env](.env)
+At the moment all variables are optional. Do not delete the .env file
 
-- **Frontend**: React.js, Next.js
-- **Mobile**: React Native
-- **Backend**: Node.js
-- **Banco de Dados**: PostgreSQL
+| Name                         | Required | Description                                                                                                                                                                                                         | Default Value         |
+|------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
+| SMTP_PWD                     | No       | The SMTP password after creating an app password with Google. [Learn how to create an app password](https://support.google.com/accounts/answer/185833?hl=en). To be able to invite people you have to configure it. | (empty)               |
+| SMTP_USER                    | No       | The SMTP username after creating an app password with Google. [Learn how to create an app password](https://support.google.com/accounts/answer/185833?hl=en)                                                        | (empty)               |
+| JWT_SECRET_KEY               | No       | JWT secret key                                                                                                                                                                                                      | your_jwt_secret       |
+| REACT_APP_GOOGLE_KEY         | No       | Google Maps API key                                                                                                                                                                                                 | (empty)               |
+| REACT_APP_GOOGLE_TRACKING_ID | No       | Google Analytics tracking ID                                                                                                                                                                                        | (empty)               |
+| PUBLIC_FRONT_URL             | No       | Frontend URL in this format `http://your.public.ip:3000`                                                                                                                                                            | http://localhost:3000 |
+| PUBLIC_API_URL               | No       | Public API URL in this format `http://your.public.ip:8080`                                                                                                                                                          | http://localhost:8080 |
+| STORAGE_TYPE                 | No       | Type of storage either local MinIO or Google Cloud Storage `gcp` or `minio`                                                                                                                                         | minio                 |
+| PUBLIC_MINIO_ENDPOINT        | No       | Public Mini endpoint in format `http://public.ip:9000`                                                                                                                                                              | http://localhost:9000 |
+| GCP_JSON                     | No       | The Google Cloud JSON key after following [these instructions](./GCP-setup.md).                                                                                                                                     | (empty)               |
+| GCP_PROJECT_ID               | No       | The Google Cloud project ID, also found in the `GCP_JSON` file.                                                                                                                                                     | (empty)               |
+| GCP_BUCKET_NAME              | No       | GCP Bucket Name                                                                                                                                                                                                     | (empty)               |
+| MAIL_RECIPIENTS              | No       | Comma-separated email addresses of the super admins where to send information emails like new signups. You can provide your email address.                                                                          | (empty)               |
+| REACT_APP_MUI_X_LICENSE      | No       | Mui Pro license key                                                                                                                                                                                                 | (empty)               |
+| FASTSPRING_PWD               | No       | FastSpring password. Fastspring is a payment gateway                                                                                                                                                                | (empty)               |
+| FASTSPRING_USER              | No       | FastSpring username                                                                                                                                                                                                 | (empty)               |
+| SPRING_PROFILES_ACTIVE       | No       | Active Spring profile(s)                                                                                                                                                                                            | (empty)               |
 
-## 📱 Funcionalidades Principais
+After changing any env variable starting with `REACT_APP_` or `PUBLIC_API_URL` you should run  `docker compose up -d --no-deps --build`
 
-- Cadastro e gerenciamento de ordens de serviço
-- Atribuição automática de técnicos baseada em localização e especialidade
-- Acompanhamento em tempo real do status dos serviços
-- Registro fotográfico e documentação dos serviços realizados
-- Assinatura digital do cliente
-- Geração de relatórios e métricas de performance
-- Histórico completo de atendimentos
-- Gestão de equipes técnicas
-- Controle de SLA (Acordo de Nível de Serviço)
+#### For remote servers
 
-## 🤝 Contribuindo
+- You need to update every env variable starting with `PUBLIC_`.
+- You must also update every env variable starting with `SMTP`.
+- Open ports if necessary: make sure to open `REACT_APP_API_URL`, `PUBLIC_FRONT_URL` ports numbers by default
+8080, and 3000. Same for `PUBLIC_MINIO_ENDPOINT` port 9000 if you use Minio.
 
-Contribuições são sempre bem-vindas! Por favor, leia o [guia de contribuição](CONTRIBUTING.md) para saber como contribuir corretamente para este projeto.
+### Run
 
-## 📄 Licença
+```sh
+docker-compose up -d
+```
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
+Now, go to http://localhost:3000 or your custom `PUBLIC_FRONT_URL`
 
-## 📞 Suporte
+Celebrate on how easy this was
 
-Para suporte ou dúvidas, por favor abra uma [issue](https://github.com/seu-usuario/emcampo/issues) ou entre em contato com a equipe de desenvolvimento.
+## Getting help
 
----
+### Docs
 
-Desenvolvido com ❤️ pela equipe Em Campo 
+https://grashjs.github.io/user-guide
+
+If you still have questions after reading the docs, concerns, bug reports, etc, please file an issue in this
+repository's Issue Tracker or send an
+email at [ibracool99@gmail.com](mailto:ibracool99@gmail.com).
+
+## Supported languages
+
+- English
+- Spanish
+- French
+- Turkish
+- Portuguese (Brazil)
+
+## 🏗️ **Tech Stack**
+
+- [Api](api) with java Spring Boot
+- [Website](frontend) with React/Typescript
+- [Mobile](mobile) with React Native.
+
+## Need Professional Help?
+
+Don't want to handle the maintenance and management yourself? We offer a complete done-for-you
+service. [Please reach out to us](mailto:ibracool99@gmail.com)
+
+## 🤝 Looking to contribute?
+
+We welcome contributions! You can help by:
+
+- ✅ Reporting bugs
+- ✅ Suggesting new features
+- ✅ Improving documentation
+- ✅ Submitting pull requests
+
+Check CONTRIBUTING.md inside each subproject for details.
+
+You can also join our [Discord server](https://discord.gg/A6eMSNwg)
+
+## Open source licensing info
+
+1) [LICENSE](LICENSE)
